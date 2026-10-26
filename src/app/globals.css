@@ -1,0 +1,628 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by the `dark` class next-themes puts on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --bg: #f7f7f5;
+  --band: #ededea;
+  --surface: #e6e6e2;
+  --card: #ffffff;
+  --ink: #0b0b0c;
+  --soft: #3a3a3d;
+  --muted: #5c5c5f;
+  --faint: #9a9a9d;
+  --line: #dcdcd8;
+  --line-2: #c4c4bf;
+  --accent: #c6f24e;
+  --accent-ink: #4d7c0f;
+  --ok: #3f6212;
+  --ok-line: #b9d48a;
+
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-line: rgba(11, 11, 12, 0.08);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  --lane-1: #65a30d;
+  --lane-1-ink: #3f6212;
+  --lane-2: #1f5fd6;
+  --lane-2-ink: #1a4fb4;
+  --lane-3: #ea580c;
+  --lane-3-ink: #b03d06;
+  --lane-4: #c026d3;
+  --lane-4-ink: #8f1a9c;
+
+  --avatar-1: #c6f24e;
+  --avatar-2: #9ab8ff;
+  --avatar-3: #ffa070;
+  --avatar-4: #ee9bfb;
+
+  /* Off the clock — its own warm palette */
+  --life-bg: #f6f0ea;
+  --life-ink: #1a1210;
+  --life-soft: #3d2f29;
+  --life-muted: #6b5a52;
+  --life-card: #fffaf6;
+  --life-line: #e8dbd1;
+  --life-strong: #cbb8ab;
+  --life-accent: #ff6a3d;
+  --life-accent-ink: #b8420f;
+  --life-feat-bg: #1a1210;
+  --life-feat-ink: #fff3ec;
+  --life-feat-soft: #e3cfc4;
+  --life-feat-icon: #ff8a5c;
+  --life-reel: #1a1210;
+
+  /* Contact mat */
+  --mat-bg: #efeeea;
+  --mat-grid: rgba(11, 11, 12, 0.05);
+  --mat-grid-strong: rgba(11, 11, 12, 0.1);
+  --mat-note: #3f6212;
+  --mat-ruler: #7a7a7d;
+  --mat-ink: #5c5c5f;
+  --key-frame: #d6d6d1;
+  --key-cap: #ffffff;
+  --key-icon: #0b0b0c;
+  --key-shade: inset 0 -7px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --key-drop: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --bg: #0b0b0c;
+  --band: #141416;
+  --surface: #18181b;
+  --card: #141416;
+  --ink: #f2f2f0;
+  --soft: #c4c4c2;
+  --muted: #a1a1a1;
+  --faint: #6e6e72;
+  --line: #26262a;
+  --line-2: #3a3a3e;
+  --accent: #c6f24e;
+  --accent-ink: #c6f24e;
+  --ok: #c6f24e;
+  --ok-line: #4a5a1e;
+
+  --glass: rgba(22, 22, 24, 0.55);
+  --glass-line: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --lane-1: #c6f24e;
+  --lane-1-ink: #c6f24e;
+  --lane-2: #7aa2ff;
+  --lane-2-ink: #9ab8ff;
+  --lane-3: #ff8a4c;
+  --lane-3-ink: #ffa070;
+  --lane-4: #e879f9;
+  --lane-4-ink: #ee9bfb;
+
+  --life-bg: #14100e;
+  --life-ink: #f5ede8;
+  --life-soft: #d6c8c0;
+  --life-muted: #ab9a90;
+  --life-card: #1c1613;
+  --life-line: #30251f;
+  --life-strong: #4a3a30;
+  --life-accent: #ff6a3d;
+  --life-accent-ink: #ff8a5c;
+  --life-feat-bg: #ff6a3d;
+  --life-feat-ink: #140c08;
+  --life-feat-soft: #2a140a;
+  --life-feat-icon: #140c08;
+  --life-reel: #0c0908;
+
+  --mat-bg: #121214;
+  --mat-grid: rgba(255, 255, 255, 0.05);
+  --mat-grid-strong: rgba(255, 255, 255, 0.1);
+  --mat-note: #c6f24e;
+  --mat-ruler: #8a8a8e;
+  --mat-ink: #a1a1a1;
+  --key-frame: #050506;
+  --key-cap: #232326;
+  --key-icon: #f2f2f0;
+  --key-shade: inset 0 -7px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --key-drop: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-band: var(--band);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-ok: var(--ok);
+  --color-ok-line: var(--ok-line);
+
+  --color-life-bg: var(--life-bg);
+  --color-life-ink: var(--life-ink);
+  --color-life-soft: var(--life-soft);
+  --color-life-muted: var(--life-muted);
+  --color-life-card: var(--life-card);
+  --color-life-line: var(--life-line);
+  --color-life-strong: var(--life-strong);
+  --color-life-accent: var(--life-accent);
+  --color-life-accent-ink: var(--life-accent-ink);
+  --color-life-feat-bg: var(--life-feat-bg);
+  --color-life-feat-ink: var(--life-feat-ink);
+  --color-life-feat-soft: var(--life-feat-soft);
+  --color-life-feat-icon: var(--life-feat-icon);
+  --color-life-reel: var(--life-reel);
+
+  --color-mat-note: var(--mat-note);
+  --color-mat-ink: var(--mat-ink);
+  --color-mat-ruler: var(--mat-ruler);
+
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-hand: var(--font-gochi-hand), "Comic Sans MS", cursive;
+  --font-display: var(--font-anton), Impact, "Arial Narrow", sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    scroll-padding-top: 96px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #0b0b0c;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Keyframes                                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes pf-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pf-draw {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes pf-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+@keyframes pf-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes pf-marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes pf-icon-in {
+  from { transform: rotate(-120deg) scale(0.4); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes pf-ping {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  80%, 100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes pf-nudge {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-4deg) translateY(4px); }
+}
+@keyframes pf-reveal {
+  from { clip-path: circle(0 at var(--vt-x, 90%) var(--vt-y, 40px)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 90%) var(--vt-y, 40px)); }
+}
+@keyframes pf-drop {
+  0% { transform: translateY(-14px); opacity: 0; }
+  55% { transform: translateY(2px); opacity: 1; }
+  75% { transform: translateY(-3px); }
+  100% { transform: none; }
+}
+@keyframes pf-spin {
+  from { transform: rotate(-180deg) scale(0.2); }
+  to { transform: none; }
+}
+@keyframes pf-fly {
+  0% { transform: translate(-14px, 10px) rotate(-20deg); opacity: 0; }
+  60% { transform: translate(2px, -2px); opacity: 1; }
+  100% { transform: none; }
+}
+@keyframes pf-road {
+  to { background-position: -20px 0; }
+}
+@keyframes pf-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Entrance + scroll-driven animations                                 */
+/* Native CSS scroll-driven animations where supported; RevealObserver */
+/* adds `no-sda` to <html> and toggles `.is-in` everywhere else.       */
+/* Without JS, nothing is hidden.                                      */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-up { animation: pf-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .anim-d1 { animation-delay: 0.1s; }
+  .anim-d2 { animation-delay: 0.22s; }
+  .anim-d3 { animation-delay: 0.34s; }
+
+  .marquee-track { animation: pf-marquee 40s linear infinite; }
+  .marquee-track:hover { animation-play-state: paused; }
+
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: pf-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+    .draw {
+      transform-origin: top;
+      animation: pf-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 55%;
+    }
+    .pop {
+      animation: pf-pop linear both;
+      animation-timeline: view();
+      animation-range: cover 25% cover 40%;
+    }
+    .write {
+      animation: pf-write linear both;
+      animation-timeline: view();
+      animation-range: entry 50% cover 45%;
+    }
+    .stagger > :nth-child(2) { animation-range: entry 10% cover 36%; }
+    .stagger > :nth-child(3) { animation-range: entry 20% cover 44%; }
+    .stagger > :nth-child(4) { animation-range: entry 30% cover 52%; }
+  }
+
+  html.no-sda .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  html.no-sda .draw {
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s ease 0.2s;
+  }
+  html.no-sda .pop {
+    transform: scale(0);
+    transition: transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) 0.6s;
+  }
+  html.no-sda .write {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1s ease 0.2s;
+  }
+  html.no-sda .stagger > :nth-child(2) { transition-delay: 0.1s; }
+  html.no-sda .stagger > :nth-child(3) { transition-delay: 0.2s; }
+  html.no-sda .stagger > :nth-child(4) { transition-delay: 0.3s; }
+  html.no-sda .is-in.reveal,
+  html.no-sda .is-in.draw,
+  html.no-sda .is-in.pop {
+    opacity: 1;
+    transform: none;
+  }
+  html.no-sda .is-in.write { clip-path: inset(0 0 0 0); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme switch: circular reveal from the toggle button                */
+/* ------------------------------------------------------------------ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  animation: pf-reveal 0.75s cubic-bezier(0.65, 0, 0.25, 1);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .tip-light { display: none; }
+.dark .theme-toggle .icon-sun,
+.dark .theme-toggle .tip-light { display: block; }
+.dark .theme-toggle .icon-moon,
+.dark .theme-toggle .tip-dark { display: none; }
+
+.theme-toggle svg { transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.theme-toggle:hover svg { transform: rotate(30deg) scale(1.1); }
+.theme-toggle:active svg { transform: rotate(30deg) scale(0.85); }
+
+.theme-tip {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.theme-toggle:hover ~ .theme-tip,
+.theme-toggle:focus-visible ~ .theme-tip { opacity: 1; transform: none; }
+.theme-toggle:hover ~ .theme-nudge,
+.theme-toggle:focus-visible ~ .theme-nudge { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .icon-swap { animation: pf-icon-in 0.55s cubic-bezier(0.3, 1.4, 0.5, 1); }
+  .theme-ping { animation: pf-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  .theme-nudge { animation: pf-nudge 2.4s ease-in-out infinite; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Header: glass bar + per-item hover animations                       */
+/* ------------------------------------------------------------------ */
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: saturate(170%) blur(18px);
+  backdrop-filter: saturate(170%) blur(18px);
+}
+
+.logo-dot { display: inline-block; transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.logo:hover .logo-dot { transform: scale(1.8) translateY(-2px); }
+
+/* Logo mark: "Branch S" */
+.logo-mark-bg { fill: var(--ink); }
+.logo-mark-path { stroke: var(--bg); stroke-dasharray: 1; stroke-dashoffset: 0; }
+.logo-mark-dot { fill: var(--accent); transform-box: fill-box; transform-origin: center; }
+.logo-mark { transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.logo:hover .logo-mark { transform: rotate(-8deg); }
+
+@keyframes pf-logo-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pf-logo-dot {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .logo-mark-path { animation: pf-logo-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both; }
+  .logo-mark-dot { animation: pf-logo-dot 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+  .logo-mark-dot-1 { animation-delay: 0.1s; }
+  .logo-mark-dot-2 { animation-delay: 0.55s; }
+  .logo-mark-dot-3 { animation-delay: 1s; }
+  /* Re-play on hover */
+  .logo:hover .logo-mark-path { animation-name: pf-logo-draw-again; }
+  .logo:hover .logo-mark-dot { animation-name: pf-logo-dot-again; }
+}
+@keyframes pf-logo-draw-again {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pf-logo-dot-again {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.nl {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 4px 0 22px;
+}
+.nl-clip { display: inline-block; overflow: hidden; height: 1.25em; line-height: 1.25; }
+.nl-t { display: inline-block; position: relative; transition: transform 0.42s cubic-bezier(0.7, 0, 0.2, 1); }
+.nl-t::after {
+  content: attr(data-t);
+  content: attr(data-t) / "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+.nl::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 4px;
+  bottom: 7px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s cubic-bezier(0.7, 0, 0.2, 1) 0.06s;
+}
+.nl:hover .nl-t,
+.nl:focus-visible .nl-t,
+.nl[aria-current="location"] .nl-t { transform: translateY(-100%); }
+.nl:hover::after,
+.nl:focus-visible::after,
+.nl[aria-current="location"]::after { transform: scaleX(1); }
+
+.nl-ic {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  color: var(--accent-ink);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.2s, transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.nl:hover .nl-ic,
+.nl:focus-visible .nl-ic,
+.nl[aria-current="location"] .nl-ic { opacity: 1; transform: none; }
+
+.nl-work .nl-ic path,
+.nl-work .nl-ic circle {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  transition: stroke-dashoffset 0.5s ease 0.05s;
+}
+.nl-work:hover .nl-ic path,
+.nl-work:hover .nl-ic circle,
+.nl-work:focus-visible .nl-ic path,
+.nl-work:focus-visible .nl-ic circle,
+.nl-work[aria-current="location"] .nl-ic path,
+.nl-work[aria-current="location"] .nl-ic circle { stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .nl-experience:hover .nl-ic,
+  .nl-experience:focus-visible .nl-ic { animation: pf-drop 0.5s ease-out both; }
+  .nl-freelance:hover .nl-ic,
+  .nl-freelance:focus-visible .nl-ic { animation: pf-spin 0.55s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+  .nl-contact:hover .nl-ic,
+  .nl-contact:focus-visible .nl-ic { animation: pf-fly 0.5s ease-out both; }
+}
+
+/* Off the clock: a different language — a motorbike rides an orange road */
+.nl-life { padding-left: 4px; padding-bottom: 2px; }
+.nl-life .nl-t::after { color: var(--life-accent-ink); }
+.nl-life:hover .nl-t,
+.nl-life:focus-visible .nl-t,
+.nl-life[aria-current="location"] .nl-t { transform: translateY(-100%) skewX(-12deg); }
+.nl.nl-life::after {
+  left: 4px;
+  bottom: 6px;
+  background: repeating-linear-gradient(90deg, var(--life-accent-ink) 0 6px, transparent 6px 10px);
+  background-size: 20px 2px;
+  transition: transform 0.55s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.moto {
+  position: absolute;
+  bottom: 7px;
+  left: 0;
+  width: 20px;
+  height: 14px;
+  color: var(--life-accent-ink);
+  opacity: 0;
+  transition: left 0.55s cubic-bezier(0.6, 0, 0.2, 1), opacity 0.15s;
+}
+.moto svg { display: block; }
+.nl-life:hover .moto,
+.nl-life:focus-visible .moto,
+.nl-life[aria-current="location"] .moto { left: calc(100% - 20px); opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .nl-life:hover::after,
+  .nl-life:focus-visible::after { animation: pf-road 0.35s linear infinite; }
+  .nl-life:hover .moto svg,
+  .nl-life:focus-visible .moto svg { animation: pf-bob 0.25s linear infinite; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Branch graph (Work + Experience)                                    */
+/* ------------------------------------------------------------------ */
+
+[data-lane="1"] { --lane: var(--lane-1); --lane-ink: var(--lane-1-ink); }
+[data-lane="2"] { --lane: var(--lane-2); --lane-ink: var(--lane-2-ink); }
+[data-lane="3"] { --lane: var(--lane-3); --lane-ink: var(--lane-3-ink); }
+[data-lane="4"] { --lane: var(--lane-4); --lane-ink: var(--lane-4-ink); }
+
+.rail { position: relative; flex: 0 0 64px; }
+.rail > span { position: absolute; display: block; box-sizing: border-box; }
+.rail-main { left: 11px; top: 0; bottom: 0; width: 2px; background: var(--line-2); }
+.rail-fork {
+  left: 12px; top: 24px; width: 32px; height: 28px;
+  border-top: 2px solid var(--lane); border-right: 2px solid var(--lane);
+  border-top-right-radius: 16px;
+}
+.rail-merge {
+  left: 12px; bottom: 24px; width: 32px; height: 28px;
+  border-bottom: 2px solid var(--lane); border-right: 2px solid var(--lane);
+  border-bottom-right-radius: 16px;
+}
+.rail-lane { left: 42px; top: 50px; bottom: 50px; width: 2px; background: var(--lane); }
+.rail-lane.is-open { top: 0; }
+.rail-node-top {
+  left: 5px; top: 17px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--rail-bg, var(--bg)); border: 2px solid var(--ink);
+}
+.rail-node-bottom {
+  left: 5px; bottom: 17px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--ink);
+}
+.rail-commit {
+  left: 36px; top: 50%; margin-top: -7px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--lane);
+  box-shadow: 0 0 0 3px var(--rail-bg, var(--bg));
+}
+.rail-commit.is-high { top: 66px; margin-top: 0; }
+
+.lane-pill { border-color: var(--lane); color: var(--lane-ink); }
+
+/* ------------------------------------------------------------------ */
+/* Contact mat                                                         */
+/* ------------------------------------------------------------------ */
+
+.mat {
+  background-color: var(--mat-bg);
+  background-image:
+    linear-gradient(var(--mat-grid-strong) 2px, transparent 2px),
+    linear-gradient(90deg, var(--mat-grid-strong) 2px, transparent 2px),
+    linear-gradient(var(--mat-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mat-grid) 1px, transparent 1px);
+  background-size: 240px 240px, 240px 240px, 48px 48px, 48px 48px;
+  background-position: 36px 36px;
+}
+
+.key {
+  display: flex;
+  width: 116px;
+  height: 116px;
+  padding: 10px;
+  border-radius: 22px;
+  background: var(--key-frame);
+  box-shadow: var(--key-drop);
+  transition: transform 0.18s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+.key:hover { transform: translateY(3px); }
+.key:active { transform: translateY(7px); }
+.key-cap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: var(--key-cap);
+  color: var(--key-icon);
+  box-shadow: var(--key-shade);
+}
+.key-cap.is-accent {
+  background: var(--accent);
+  color: #0b0b0c;
+  box-shadow: inset 0 -7px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
